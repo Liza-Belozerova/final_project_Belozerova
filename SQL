@@ -1,0 +1,17 @@
+scooter_rent=# SELECT login, COUNT("courierId") FROM "Couriers" AS c JOIN "Orders" AS o ON c.id=o."courierId" WHERE "inDelivery" = true GROUP BY c.id;
+ login | count
+-------+-------
+ Maxim |     2
+(1 row)
+
+
+
+scooter_rent=# SELECT track, CASE WHEN finished = 't' THEN 2 when "inDelivery" = 't' THEN 1 when cancelled = 't' THEN -1 ELSE 0 END AS status FROM "Orders";
+ track  | status
+--------+--------
+ 690983 |      0
+  61802 |      1
+  61802 |      2
+ 445356 |     -1
+(4 rows)
+
